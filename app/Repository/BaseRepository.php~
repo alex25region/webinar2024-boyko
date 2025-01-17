@@ -14,11 +14,9 @@ abstract class BaseRepository implements RepositoryInterface
     {
     }
 
-    public function list(): LengthAwarePaginator
+    public function list(): \Illuminate\Contracts\Pagination\LengthAwarePaginator
     {
         $newQuery = $this->model->query();
-
-//        return $newQuery->get();
         return $newQuery->paginate(env('PAGINATION_LIMIT', 15));
     }
 

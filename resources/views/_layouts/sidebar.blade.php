@@ -33,6 +33,12 @@
                         <p>{{ trans('Пользователи') }}</p>
                     </a>
                 </li>
+                <li class="nav-item {{ active_link('projects.*') }}">
+                    <a href="{{ route('projects.index') }}">
+                        <i class="fas fa-project-diagram"></i>
+                        <p>{{ trans('Проекты') }}</p>
+                    </a>
+                </li>
             </ul>
 
 

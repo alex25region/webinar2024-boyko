@@ -3,7 +3,7 @@
     <div class="sidebar-logo">
         <!-- Logo Header -->
         <div class="logo-header border-bottom border-primary border-opacity-10" data-background-color="dark" style="border-color: #0a58ca; border-bottom: #474747 !important;">
-            <a href="#" class="logo w-100 text-white-50">
+            <a href="{{ route('dashboard') }}" class="logo w-100 text-white-50">
                 <div class="d-flex align-content-center justify-content-center w-100">
                     <h1 class="fw-bolder">WEBINAR</h1>
                 </div>
@@ -31,6 +31,12 @@
                     <a href="{{ route('users.index') }}">
                         <i class="fas fa-users"></i>
                         <p>{{ trans('Пользователи') }}</p>
+                    </a>
+                </li>
+                <li class="nav-item {{ active_link('projects.*') }}">
+                    <a href="{{ route('projects.index') }}">
+                        <i class="fas fa-users"></i>
+                        <p>{{ trans('Проекты') }}</p>
                     </a>
                 </li>
             </ul>

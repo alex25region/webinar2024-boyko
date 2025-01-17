@@ -53,10 +53,10 @@ class User extends Authenticatable
         ];
     }
 
-    public function name(): Attribute
-    {
-        return Attribute::make(get: fn($value) => mb_ucfirst($value));
-    }
+//    public function name(): Attribute
+//    {
+//        return Attribute::make(get: fn($value) => mb_ucfirst($value));
+//    }
 
     public function scopeAdmin(Builder $query): void
     {

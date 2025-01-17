@@ -15,7 +15,7 @@ class SaveUserRequest extends FormRequest
         return true;
     }
 
-    protected function prepareForValidation()
+    protected function prepareForValidation(): array
     {
         $this->merge(['is_admin' => $this->has('is_admin')]);
 

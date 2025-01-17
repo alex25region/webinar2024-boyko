@@ -2,10 +2,7 @@
 
 namespace App\Providers;
 
-use App\Models\Project;
 use App\Models\User;
-use App\Repository\Project\ProjectRepository;
-use App\Repository\Project\ProjectRepositoryInterface;
 use App\Repository\User\UserRepository;
 use App\Repository\User\UserRepositoryInterface;
 use Illuminate\Pagination\Paginator;

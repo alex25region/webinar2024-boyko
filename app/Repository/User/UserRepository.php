@@ -6,7 +6,7 @@ namespace App\Repository\User;
 
 use App\Repository\BaseRepository;
 
-class UserRepository extends BaseRepository implements UserRepositoryInterface
+final class UserRepository extends BaseRepository implements UserRepositoryInterface
 {
 
 }
