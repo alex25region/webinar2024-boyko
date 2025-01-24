@@ -2,8 +2,11 @@
 
 namespace App\Providers;
 
+use App\Models\Goal;
 use App\Models\Project;
 use App\Models\User;
+use App\Repository\Goal\GoalRepository;
+use App\Repository\Goal\GoalRepositoryInterface;
 use App\Repository\Project\ProjectRepository;
 use App\Repository\Project\ProjectRepositoryInterface;
 use App\Repository\User\UserRepository;
@@ -20,6 +23,7 @@ class AppServiceProvider extends ServiceProvider
     {
         $this->app->singleton(UserRepositoryInterface::class, fn() => new UserRepository($this->app->make(User::class)));
         $this->app->singleton(ProjectRepositoryInterface::class, fn() => new ProjectRepository($this->app->make(Project::class)));
+        $this->app->singleton(GoalRepositoryInterface::class, fn() => new GoalRepository($this->app->make(Goal::class)));
     }
 
     /**

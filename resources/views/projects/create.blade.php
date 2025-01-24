@@ -1,6 +1,6 @@
 @extends('_layouts.main')
 
-@section('title', trans('Создание проекта'))
+@section('title', __('Создание проекта'))
 
 @section('content')
 

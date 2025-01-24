@@ -1,6 +1,6 @@
 @extends('_layouts.main')
 
-@section('title', 'Проекты')
+@section('title', __('Проекты'))
 
 @section('content')
     <div class="card">
@@ -39,15 +39,19 @@
                         <td>{{ $project->name }}</td>
                         <td>{{ $project->image }}</td>
                         <td>{{ $project->description }}</td>
-                        <td>
-                            <a href="{{ route('projects.edit', $project) }}" class="text-secondary">
-                                <i class="fas fa-pencil-alt fs-4"></i>
+                        <td class="text-nowrap">
+                            <a href="{{ route('projects.show', $project) }}" class="btn btn-success btn-sm me-2 shadow fw-normal py-1 px-2">
+                                {{__('Посмотреть')}}
                             </a>
-                            <a href="#" class="text-danger"
+                            <a href="{{ route('projects.edit', $project) }}" class="btn btn-secondary btn-sm me-2 shadow fw-normal py-1 px-2">
+                                {{__('Редактировать')}}
+                            </a>
+                            <a href="#" class="btn btn-danger btn-sm me-2 shadow fw-normal py-1 px-2"
                                onclick="event.preventDefault();
+                               // TODO перевод фразы
                                        if(confirm('Вы действительно хотите удалить проект?')) {document.getElementById('user-delete-{{ $project->id }}').submit();}
                                        ">
-                                <i class="fa fa-trash-alt fs-3 ms-2"></i>
+                                {{__('Удалить')}}
                             </a>
                                 <form action="{{ route('projects.destroy', $project) }}" method="POST"
                                       id="user-delete-{{ $project->id }}">

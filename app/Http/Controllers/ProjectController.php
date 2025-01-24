@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace App\Http\Controllers;
 
@@ -12,14 +13,15 @@ use Illuminate\Http\Request;
 
 final class ProjectController extends Controller
 {
-    public function __construct(private ProjectRepositoryInterface $projectRepository)
+    public function __construct(private readonly ProjectRepositoryInterface $repository)
     {
 
     }
+
     public function index(): View
     {
         return view('projects.index', [
-            'projects' => $this->projectRepository->list(),
+            'projects' => $this->repository->list(),
         ]);
     }
 
@@ -32,7 +34,7 @@ final class ProjectController extends Controller
 
     public function store(SaveProjectRequest $request): RedirectResponse
     {
-        if ($this->projectRepository->create($request->validated())) {
+        if ($this->repository->create($request->validated())) {
             session()->put('success', 'Проект успешно создан!');
         } else {
             session()->put('error', 'Ошибка! Не удалось создать пользователя.');
@@ -40,18 +42,23 @@ final class ProjectController extends Controller
         return to_route('projects.index');
     }
 
+    public function show(Project $project): View
+    {
+        return view('projects.show', compact('project'));
+    }
+
     public function edit(Project $project)
     {
         $users = User::query()->get();
-        return view('projects.edit', compact('project','users'));
+        return view('projects.edit', compact('project', 'users'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(SaveProjectRequest $request, Project $project)
+    public function update(SaveProjectRequest $request, Project $project): RedirectResponse
     {
-        if ($this->projectRepository->update($project, $request->validated())) {
+        if ($this->repository->update($project, $request->validated())) {
             session()->put('success', 'Проект успешно отредактирован!');
         } else {
             session()->put('error', 'Ошибка! Не удалось отредактировать проект.');
@@ -61,7 +68,7 @@ final class ProjectController extends Controller
 
     public function destroy(Project $project): RedirectResponse
     {
-        if ($this->projectRepository->delete($project)) {
+        if ($this->repository->delete($project)) {
             session()->put('success', 'Проект успешно удален!');
         } else {
             session()->put('error', 'Ошибка! Не удалось удалить проект.');

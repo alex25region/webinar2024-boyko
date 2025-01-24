@@ -5,7 +5,7 @@
             <div class="col-sm-12 ">
                 <div class="mb-3">
                     <label class="mb-1 fw-bolder text-black-50" for="user_id">{{ __('Пользователь') }}</label>
-                    <select class="form-control form-select" id="user_id" name="user_id" required>
+                    <select class="form-control form-select" id="user_id" name="user_id" >
                         <option value="" disabled selected>Выберите значение</option>
                         @foreach($users as $user)
                                 <option value="{{ $user->id }}" {{$user->id == $project->user_id ? 'selected ' : ''}}>
@@ -13,6 +13,9 @@
                                 </option>
                         @endforeach
                     </select>
+                    @error('user_id')
+                    <div class="text-danger">{{ $message }}</div>
+                    @enderror
                 </div>
             </div>
         </div>
@@ -20,7 +23,7 @@
             <div class="col-sm-12 ">
                 <div class="mb-3">
                     <label class="mb-1 fw-bolder text-black-50" for="name">{{ __('Наименование') }}</label>
-                    <input type="text" id="name" name="name" value="{{ old('name', $project->name)}}" class="form-control" required>
+                    <input type="text" id="name" name="name" value="{{ old('name', $project->name)}}" class="form-control" >
                     @error('name')
                     <div class="text-danger">{{ $message }}</div>
                     @enderror
@@ -31,7 +34,7 @@
             <div class="col-12">
                 <div class="mb-3">
                     <div class="form-group fw-bolder text-black-50 px-0">
-                        <label for="file" class="pe-2">Необходимо выбрать документ:</label>
+                        <label for="file" class="pe-2">{{__('Необходимо выбрать изображение')}}:</label>
                         <input type="file" class="form-control-file" name="document">
                     </div>
                     @error('image')

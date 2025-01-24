@@ -19,24 +19,24 @@
                 <span class="sidebar-mini-icon">
                   <i class="fa fa-ellipsis-h"></i>
                 </span>
-                    <h4 class="text-section">Сущности</h4>
+{{--                    <h4 class="text-section">Сущности</h4>--}}
                 </li>
                 <li class="nav-item {{ active_link('dashboard') }}">
                     <a href="{{ route('dashboard') }}">
                         <i class="fas fa-home"></i>
-                        <p>{{ trans('Главная') }}</p>
+                        <p>{{ __('Главная') }}</p>
                     </a>
                 </li>
                 <li class="nav-item {{ active_link('users.*') }}">
                     <a href="{{ route('users.index') }}">
                         <i class="fas fa-users"></i>
-                        <p>{{ trans('Пользователи') }}</p>
+                        <p>{{ __('Пользователи') }}</p>
                     </a>
                 </li>
                 <li class="nav-item {{ active_link('projects.*') }}">
                     <a href="{{ route('projects.index') }}">
                         <i class="fas fa-project-diagram"></i>
-                        <p>{{ trans('Проекты') }}</p>
+                        <p>{{ __('Проекты') }}</p>
                     </a>
                 </li>
             </ul>

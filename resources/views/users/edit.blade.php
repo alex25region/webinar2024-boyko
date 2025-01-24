@@ -1,6 +1,6 @@
 
 @extends('_layouts.main')
-@section('title', 'Редактирование пользователя')
+@section('title', __('Редактирование пользователя'))
 
 @section('content')
     <div class="card">

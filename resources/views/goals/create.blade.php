@@ -1,16 +1,14 @@
-
 @extends('_layouts.main')
-@section('title', trans('Создание пользователя'))
+
+@section('title', __('Создание цели'))
 
 @section('content')
 
     <div class="card">
         <div class="row m-3 mb-0 pb-0">
-            {{ Breadcrumbs::render('users.create') }}
+            {{ Breadcrumbs::render('goals.create', $project) }}
         </div>
     </div>
-
-    @include('_layouts.errors')
 
     <div class="card p-2">
         <div class="card-header">
@@ -21,8 +19,8 @@
 
         <div class="card-body">
             <div class="col-4">
-                @include('users.form', [
-                    'action' => route('users.store'),
+                @include('goals.form', [
+                    'action' => route('goals.store', $project),
                     'method' => 'post',
                 ])
             </div>
