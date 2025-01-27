@@ -12,12 +12,9 @@
     <div class="card p-2">
         <div class="card-header">
             <div class="d-flex justify-content-between align-items-center">
-                <h1 class="m-0">@yield('title')</h1>
-                <div class="">
-                    <a href="{{ route('users.create') }}" class="btn btn-round btn-secondary">
+                <h1 class="m-0">@yield('title')&nbsp;&nbsp;<a href="{{ route('users.create') }}" class="btn btn-round btn-secondary shadow">
                         {{ __('Создать пользователя') }}
-                    </a>
-                </div>
+                    </a></h1>
             </div>
         </div>
 
@@ -25,11 +22,11 @@
             <table class="table table-hover table-sm table-striped table-bordered text-center shadow-sm">
                 <thead>
                 <tr>
-                    <th scope="col" class="bg-secondary text-white border-0">{{ __('Имя') }}</th>
-                    <th scope="col" class="bg-secondary text-white border-0">Email</th>
-                    <th scope="col" class="bg-secondary text-white border-0">{{ __('Телефон') }}</th>
-                    <th scope="col" class="bg-secondary text-white border-0">{{ __('Администратор') }}</th>
-                    <th scope="col" class="bg-secondary text-white border-0">{{ __('Действия') }}</th>
+                    <th scope="col" class="bg-secondary text-white text-white-50 border-0">{{ __('Имя') }}</th>
+                    <th scope="col" class="bg-secondary text-white text-white-50 border-0">Email</th>
+                    <th scope="col" class="bg-secondary text-white text-white-50 border-0">{{ __('Телефон') }}</th>
+                    <th scope="col" class="bg-secondary text-white text-white-50 border-0">{{ __('Администратор') }}</th>
+                    <th scope="col" class="bg-secondary text-white text-white-50 border-0">{{ __('Действия') }}</th>
                 </tr>
                 </thead>
                 <tbody>

@@ -8,7 +8,6 @@ use App\Models\Goal;
 use App\Models\Project;
 use App\Repository\Goal\GoalRepositoryInterface;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
 use Illuminate\View\View;
 
 final class GoalController extends Controller
@@ -17,6 +16,7 @@ final class GoalController extends Controller
     {
 
     }
+
     /**
      * Display a listing of the resource.
      */
@@ -37,34 +37,45 @@ final class GoalController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(SaveGoalRequest $request)
+    public function store(SaveGoalRequest $request): RedirectResponse
     {
-        $goal = $this->repository->create($request->validated());
+        if ($goal = $this->repository->create($request->validated())) {
+            session()->put('success', 'Цель успешно создана!');
+
+        } else {
+            session()->put('error', 'Ошибка! Не удалось создать цель.');
+        }
         return to_route('projects.show', $goal->project_id);
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(Goal $goal)
+    public function show(Project $project, Goal $goal): View
     {
-        //
+        return view('goals.show', compact('project', 'goal'));
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Goal $goal)
+    public function edit(Project $project, Goal $goal): View
     {
-        //
+        return view('goals.edit', compact('project', 'goal'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Goal $goal)
+    public function update(Project $project, SaveGoalRequest $request, Goal $goal, GoalRepositoryInterface $repository): RedirectResponse
     {
-        //
+        if ($repository->update($goal, $request->validated())) {
+            session()->put('success', 'Цель успешно отредактирована!');
+
+        } else {
+            session()->put('error', 'Ошибка! Не удалось отредактировать цель.');
+        }
+        return to_route('projects.show', $project);
     }
 
     /**
@@ -72,7 +83,12 @@ final class GoalController extends Controller
      */
     public function destroy(Project $project, Goal $goal, GoalRepositoryInterface $repository): RedirectResponse
     {
-        $repository->delete($goal);
+        if ($repository->delete($goal)) {
+            session()->put('success', 'Цель успешно удалена!');
+
+        } else {
+            session()->put('error', 'Ошибка! Не удалось удалить цель.');
+        }
         return to_route('projects.show', $project);
     }
 }

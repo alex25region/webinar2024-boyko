@@ -12,12 +12,10 @@
     <div class="card p-2">
         <div class="card-header">
             <div class="d-flex justify-content-between align-items-center">
-                <h1 class="m-0">@yield('title')</h1>
-                <div class="">
-                    <a href="{{ route('projects.create') }}" class="btn btn-round btn-secondary">
+                <h1 class="m-0">@yield('title')&nbsp;&nbsp;<a href="{{ route('projects.create') }}"
+                                                               class="btn btn-round btn-secondary shadow">
                         {{ __('Создать проект') }}
-                    </a>
-                </div>
+                    </a></h1>
             </div>
         </div>
 
@@ -25,25 +23,29 @@
             <table class="table table-hover table-sm table-striped table-bordered text-center shadow-sm">
                 <thead>
                 <tr>
-                    <th scope="col" class="bg-secondary text-white border-0">{{ __('Пользователь') }}</th>
-                    <th scope="col" class="bg-secondary text-white border-0">{{ __('Наименование') }}</th>
-                    <th scope="col" class="bg-secondary text-white border-0">Image</th>
-                    <th scope="col" class="bg-secondary text-white border-0">{{ __('Описание') }}</th>
-                    <th scope="col" class="bg-secondary text-white border-0">{{ __('Действия') }}</th>
+                    <th scope="col" class="bg-secondary text-white text-white-50 border-0">{{ __('Пользователь') }}</th>
+                    <th scope="col" class="bg-secondary text-white text-white-50 border-0">{{ __('Наименование') }}</th>
+                    <th scope="col" class="bg-secondary text-white text-white-50 border-0">{{ __('Изображение') }}e</th>
+                    <th scope="col" class="bg-secondary text-white text-white-50 border-0">{{ __('Описание') }}</th>
+                    <th scope="col" class="bg-secondary text-white text-white-50 border-0">{{ __('Действия') }}</th>
                 </tr>
                 </thead>
                 <tbody>
                 @foreach($projects as $project)
                     <tr>
-                        <td>{{ $project->user->firstname }}, {{ $project->user->lastname }} ({{ $project->user->email }})</td>
+                        <td>{{ $project->user->firstname }}, {{ $project->user->lastname }} ({{ $project->user->email }}
+                            )
+                        </td>
                         <td>{{ $project->name }}</td>
                         <td>{{ $project->image }}</td>
                         <td>{{ $project->description }}</td>
                         <td class="text-nowrap">
-                            <a href="{{ route('projects.show', $project) }}" class="btn btn-success btn-sm me-2 shadow fw-normal py-1 px-2">
-                                {{__('Посмотреть')}}
+                            <a href="{{ route('projects.show', $project) }}"
+                               class="btn btn-success btn-sm me-2 shadow fw-normal py-1 px-2">
+                                {{__('Подробнее')}}
                             </a>
-                            <a href="{{ route('projects.edit', $project) }}" class="btn btn-secondary btn-sm me-2 shadow fw-normal py-1 px-2">
+                            <a href="{{ route('projects.edit', $project) }}"
+                               class="btn btn-secondary btn-sm me-2 shadow fw-normal py-1 px-2">
                                 {{__('Редактировать')}}
                             </a>
                             <a href="#" class="btn btn-danger btn-sm me-2 shadow fw-normal py-1 px-2"
@@ -53,10 +55,10 @@
                                        ">
                                 {{__('Удалить')}}
                             </a>
-                                <form action="{{ route('projects.destroy', $project) }}" method="POST"
-                                      id="user-delete-{{ $project->id }}">
-                                    @csrf @method('delete')
-                                </form>
+                            <form action="{{ route('projects.destroy', $project) }}" method="POST"
+                                  id="user-delete-{{ $project->id }}">
+                                @csrf @method('delete')
+                            </form>
                         </td>
                     </tr>
                 @endforeach

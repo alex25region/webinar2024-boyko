@@ -3,6 +3,8 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers;
 
+use App\Models\Goal;
+use App\Models\Project;
 use App\Models\Step;
 use Illuminate\Http\Request;
 
@@ -19,9 +21,9 @@ final class StepController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create(Project $project, Goal $goal)
     {
-        //
+        dd(__METHOD__);
     }
 
     /**

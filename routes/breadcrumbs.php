@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Goal;
 use App\Models\User;
 use App\Models\Project;
 use Diglactic\Breadcrumbs\Breadcrumbs;
@@ -61,6 +62,12 @@ Breadcrumbs::for('goals.create', function (BreadcrumbTrail $trail, Project $proj
     $trail->parent('projects.index');
     $trail->push('Проект' . ' - ' .  $project->name, route('projects.show', $project));
     $trail->push(__('Создание цели'));
+});
+
+Breadcrumbs::for('goals.show', function (BreadcrumbTrail $trail, Project $project, Goal $goal) {
+    $trail->parent('projects.index');
+    $trail->push('Проект' . ' - ' .  $project->name, route('projects.show', $project));
+    $trail->push(__('Цель - ') . $goal->name);
 });
 //
 //Breadcrumbs::for('projects.create', function (BreadcrumbTrail $trail) {
