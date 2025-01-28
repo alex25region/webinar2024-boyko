@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\GoalController;
+use App\Http\Controllers\StepController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ProjectController;
 use App\Models\User;
@@ -14,12 +15,12 @@ Route::resource('projects', ProjectController::class)->names('projects');
 Route::group(['prefix' => 'projects/{project}'], function () {
 
 
+    Route::resource('goals', GoalController::class)->names('goals');
     Route::group(['prefix' => 'goals/{goal}'], function () {
-        Route::resource('steps', GoalController::class)->names('steps');
+        Route::resource('steps', StepController::class)->names('steps');
     });
 
-    Route::resource('goals', GoalController::class)->names('goals');
 
-//    Route::prefix('goals/{goal}')->resource('steps', GoalController::class)->names('steps');
+
 });
 

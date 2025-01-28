@@ -1,15 +1,14 @@
 <?php
-declare(strict_types=1);
 
 namespace Database\Factories;
 
-use App\Models\User;
+use App\Models\Project;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Project>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Goal>
  */
-class ProjectFactory extends Factory
+class GoalFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -19,9 +18,9 @@ class ProjectFactory extends Factory
     public function definition(): array
     {
         return [
-//            'user_id' => User::factory()->create(),
+//            'project_id' => Project::factory()->create(),
             'name' => fake()->name(),
-            'description' => fake()->text(),
+            'term_in_months' => fake()->numberBetween(1, 60),
         ];
     }
 }

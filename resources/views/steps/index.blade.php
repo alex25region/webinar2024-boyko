@@ -23,27 +23,23 @@
                 @forelse($goal->steps as $step)
                     <tr>
                         <td>{{ $step->name }}</td>
-                        <td>{{ $step->started_at->format('d.m.Y H:i') }}</td>
-                        <td>{{ $step->finished_at->format('d.m.Y H:i') }}</td>
+                        <td>{{ $step->started_at->format('d.m.Y') }}</td>
+                        <td>{{ $step->finished_at->format('d.m.Y') }}</td>
                         <td class="text-nowrap">
-                            {{--<a href="{{ route('goals.show', [$project, $step]) }}"
-                               class="btn btn-success btn-sm me-2 shadow fw-normal py-1 px-2">
-                                {{__('Подробнее')}}
-                            </a>
-                            <a href="{{ route('goals.edit', [$project, $step]) }}"
+                            <a href="{{ route('steps.edit', [$project, $goal, $step]) }}"
                                class="btn btn-secondary btn-sm me-2 shadow fw-normal py-1 px-2">
                                 {{__('Редактировать')}}
                             </a>
                             <a href="#" class="btn btn-danger btn-sm me-2 shadow fw-normal py-1 px-2"
                                onclick="event.preventDefault();
                                         // TODO перевод фразы
-                                       if(confirm('Вы действительно хотите удалить цель?')) {document.getElementById('goal-delete-{{ $step->id }}').submit();}
+                                       if(confirm('Вы действительно хотите удалить шаг?')) {document.getElementById('step-delete-{{ $step->id }}').submit();}
                                        ">
                                 {{__('Удалить')}}
                             </a>
-                            <form action="{{ route('goals.destroy', [$project, $ste]) }}" method="POST" id="goal-delete-{{ $step->id }}">
+                            <form action="{{ route('steps.destroy', [$project, $goal, $step]) }}" method="POST" id="step-delete-{{ $step->id }}">
                                 @csrf @method('delete')
-                            </form>--}}
+                            </form>
                         </td>
                     </tr>
                 @empty

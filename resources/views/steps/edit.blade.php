@@ -1,16 +1,14 @@
-
 @extends('_layouts.main')
 
-@section('title', __('Редактирование проекта'))
+@section('title', __('Редактирование шага') . ' - ' . $step->name)
 
 @section('content')
+
     <div class="card">
         <div class="row m-3 mb-0 pb-0">
-            {{ Breadcrumbs::render('projects.edit', $project) }}
+            {{ Breadcrumbs::render('steps.edit', $project, $goal, $step) }}
         </div>
     </div>
-
-    @include('_layouts.errors')
 
     <div class="card p-2">
         <div class="card-header">
@@ -21,8 +19,8 @@
 
         <div class="card-body">
             <div class="col-4">
-                @include('projects.form', [
-                    'action' => route('projects.update', $project),
+                @include('steps.form', [
+                    'action' => route('steps.update', [$project, $goal, $step]),
                     'method' => 'put',
                 ])
             </div>

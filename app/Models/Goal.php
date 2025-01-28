@@ -2,16 +2,22 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
-use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class Goal extends Model
 {
+    use HasFactory;
+
     protected $table = 'goals';
 
-    protected $fillable = ['project_id', 'name', 'term_in_months'];
+    protected $fillable = [
+        'project_id',
+        'name',
+        'term_in_months'
+    ];
 
     public function project(): BelongsTo
     {

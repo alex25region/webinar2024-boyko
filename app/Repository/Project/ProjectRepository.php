@@ -8,10 +8,6 @@ use Illuminate\Pagination\LengthAwarePaginator;
 
 final class ProjectRepository extends BaseRepository implements ProjectRepositoryInterface
 {
-    public function __construct(protected Model $model)
-    {
-    }
-
     public function list(): LengthAwarePaginator
     {
         $newQuery = $this->model->query();

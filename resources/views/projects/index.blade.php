@@ -13,7 +13,7 @@
         <div class="card-header">
             <div class="d-flex justify-content-between align-items-center">
                 <h1 class="m-0">@yield('title')&nbsp;&nbsp;<a href="{{ route('projects.create') }}"
-                                                               class="btn btn-round btn-secondary shadow">
+                                                              class="btn btn-round btn-secondary shadow">
                         {{ __('Создать проект') }}
                     </a></h1>
             </div>

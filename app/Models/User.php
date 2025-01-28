@@ -69,8 +69,13 @@ class User extends Authenticatable
         return $this->hasMany(Project::class);
     }
 
-    public function allGoals(): HasManyThrough
-    {
-        return $this->hasManyThrough(Goal::class, Project::class);
-    }
+//    public function goals(): HasManyThrough
+//    {
+//        return $this->hasManyThrough(Goal::class, Project::class);
+//    }
+//
+//    public function steps(): HasManyThrough
+//    {
+//        return $this->hasManyThrough(Step::class, Goal::class);
+//    }
 }

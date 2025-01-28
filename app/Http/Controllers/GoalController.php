@@ -67,9 +67,9 @@ final class GoalController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Project $project, SaveGoalRequest $request, Goal $goal, GoalRepositoryInterface $repository): RedirectResponse
+    public function update(Project $project, SaveGoalRequest $request, Goal $goal): RedirectResponse
     {
-        if ($repository->update($goal, $request->validated())) {
+        if ($this->repository->update($goal, $request->validated())) {
             session()->put('success', 'Цель успешно отредактирована!');
 
         } else {
@@ -81,9 +81,9 @@ final class GoalController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Project $project, Goal $goal, GoalRepositoryInterface $repository): RedirectResponse
+    public function destroy(Project $project, Goal $goal): RedirectResponse
     {
-        if ($repository->delete($goal)) {
+        if ($this->repository->delete($goal)) {
             session()->put('success', 'Цель успешно удалена!');
 
         } else {

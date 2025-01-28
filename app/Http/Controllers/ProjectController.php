@@ -9,7 +9,6 @@ use App\Models\User;
 use App\Repository\Project\ProjectRepositoryInterface;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
 
 final class ProjectController extends Controller
 {

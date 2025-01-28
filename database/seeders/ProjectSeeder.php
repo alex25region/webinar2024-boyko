@@ -34,6 +34,8 @@ class ProjectSeeder extends Seeder
 
         DB::table('projects')->insert($projects);
 
+
+
         Project::factory(10)->create();
     }
 }

@@ -1,4 +1,5 @@
 @extends('_layouts.main')
+
 @section('title', __('Просмотр проекта'))
 
 @section('content')

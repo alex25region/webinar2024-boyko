@@ -54,7 +54,6 @@ Breadcrumbs::for('projects.show', function (BreadcrumbTrail $trail, Project $pro
 });
 
 
-
 // --------------------------------------------------------------------------
 // Goals
 
@@ -67,15 +66,19 @@ Breadcrumbs::for('goals.create', function (BreadcrumbTrail $trail, Project $proj
 Breadcrumbs::for('goals.show', function (BreadcrumbTrail $trail, Project $project, Goal $goal) {
     $trail->parent('projects.index');
     $trail->push('Проект' . ' - ' .  $project->name, route('projects.show', $project));
-    $trail->push(__('Цель - ') . $goal->name);
+    $trail->push(__('Цель - ') . $goal->name, route('goals.show', [$project, $goal]));
 });
-//
-//Breadcrumbs::for('projects.create', function (BreadcrumbTrail $trail) {
-//    $trail->parent('projects.index');
-//    $trail->push(__('Создание проекта'));
-//});
-//
-//Breadcrumbs::for('projects.edit', function (BreadcrumbTrail $trail, Project $project) {
-//    $trail->parent('projects.index');
-//    $trail->push(__('Редактирование проекта') . ' - ' .  $project->name);
-//});
+
+
+// --------------------------------------------------------------------------
+// Steps
+
+Breadcrumbs::for('steps.create', function (BreadcrumbTrail $trail, Project $project, Goal $goal) {
+    $trail->parent('goals.show', $project, $goal);
+    $trail->push(__('Создание шага'));
+});
+
+Breadcrumbs::for('steps.edit', function (BreadcrumbTrail $trail, Project $project, Goal $goal) {
+    $trail->parent('goals.show', $project, $goal);
+    $trail->push(__('Редактирование шага'));
+});
