@@ -50,5 +50,11 @@
     "Просмотр шага": "View step",
     "Приоритет": "Priority",
     "Вы действительно хотите удалить проект?": "Are you sure you want to delete the project?",
-    "Вы действительно хотите удалить пользователя?": "Are you sure you want to delete the user?"
+    "Вы действительно хотите удалить пользователя?": "Are you sure you want to delete the user?",
+    "Забыли пароль?": "Forgot Your Password?",
+    "Войти": "Login",
+    "Регистрация": "Registration",
+    "Зарегистрироваться": "Registration",
+    "Запомнить меня": "Remember me",
+    "У Вас нету аккаунта?": "Don't have an account yet?"
 }

@@ -14,13 +14,10 @@ Route::resource('projects', ProjectController::class)->names('projects');
 
 Route::group(['prefix' => 'projects/{project}'], function () {
 
-
     Route::resource('goals', GoalController::class)->names('goals');
     Route::group(['prefix' => 'goals/{goal}'], function () {
         Route::resource('steps', StepController::class)->names('steps');
     });
-
-
 
 });
 
