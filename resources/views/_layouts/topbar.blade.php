@@ -4,7 +4,7 @@
         <div class="container-fluid">
 
             <ul class="navbar-nav topbar-nav ms-md-auto align-items-center">
-
+                @if(Auth::check())
                 <li class="nav-item topbar-user dropdown hidden-caret">
                     <a
                         class="dropdown-toggle profile-pic"
@@ -19,10 +19,12 @@
                                 class="avatar-img rounded-circle"
                             />
                         </div>
-                        <span class="profile-username">
-                                    {{--<span class="fw-bold">{{ Auth()->user()->name }}</span>--}}
-                                    <span class="fw-bold">#</span>
-                        </span>
+
+                            <span class="fw-bold ms-2">{{ Auth()->user()->email }}</span>
+                            {{--                        <span class="profile-username">--}}
+                            {{--                                    <span class="fw-bold">{{ Auth()->user()->email }}</span>--}}
+                            {{--                        </span>--}}
+
                     </a>
                     <ul class="dropdown-menu dropdown-user animated fadeIn">
                         <div class="dropdown-user-scroll scrollbar-outer">
@@ -36,33 +38,34 @@
                                         />
                                     </div>
                                     <div class="u-text">
-                                        {{--<h4>{{ Auth()->user()->name }}</h4>--}}
-                                        {{--<p class="text-muted">{{ Auth()->user()->email }}</p>--}}
+                                        <h4>{{ Auth()->user()->name }}</h4>
+                                        <p class="text-muted">{{ Auth()->user()->email }}</p>
                                         <h4>#</h4>
                                         <p class="text-muted">#</p>
                                     </div>
                                 </div>
                             </li>
                             <li>
-                                {{--<div class="dropdown-divider"></div>--}}
-                                {{--<a class="dropdown-item" href="#">--}}
-                                {{--Account Setting--}}
-                                {{--</a>--}}
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="#">
+                                    Account Setting
+                                </a>
                                 <div class="dropdown-divider"></div>
 
-                                {{--<a class="dropdown-item" href="{{ route('logout') }}"--}}
-                                {{--onclick="event.preventDefault();--}}
-                                {{--document.getElementById('logout-form').submit();">--}}
-                                {{--Выйти из системы--}}
-                                {{--</a>--}}
+                                <a class="dropdown-item" href="{{ route('logout') }}"
+                                   onclick="event.preventDefault();
+                                document.getElementById('logout-form').submit();">
+                                    Выйти из системы
+                                </a>
 
-                                {{--<form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">--}}
-                                {{--@csrf--}}
-                                {{--</form>--}}
+                                <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                    @csrf
+                                </form>
                             </li>
                         </div>
                     </ul>
                 </li>
+                @endif
             </ul>
         </div>
     </nav>

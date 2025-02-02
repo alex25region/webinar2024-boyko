@@ -32,10 +32,14 @@ class FortifyServiceProvider extends ServiceProvider
         Fortify::createUsersUsing(CreateNewUser::class);
         Fortify::updateUserProfileInformationUsing(UpdateUserProfileInformation::class);
         Fortify::updateUserPasswordsUsing(UpdateUserPassword::class);
-        Fortify::resetUserPasswordsUsing(ResetUserPassword::class);
+//        Fortify::resetUserPasswordsUsing(ResetUserPassword::class);
 
-        Fortify::loginView(fn (): View => view('auth.login2'));
+        Fortify::loginView(fn (): View => view('auth.login'));
         Fortify::registerView(fn (): View => view('auth.register'));
+        Fortify::resetPasswordView(fn (): View => view('auth.password-reset'));
+
+
+
 
         RateLimiter::for('login', function (Request $request) {
             $throttleKey = Str::transliterate(Str::lower($request->input(Fortify::username())).'|'.$request->ip());

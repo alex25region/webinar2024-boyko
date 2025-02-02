@@ -3,100 +3,57 @@
 @section('title', __('Авторизация'))
 
 @section('content')
-    <div class="row justify-content-center ">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header h2">@yield('title')</div>
 
-                <div class="card-body">
-                    <form method="POST" action="{{ route('login') }}">
-                        @csrf
-
-                        <div class="row mb-3">
-                            <label for="email"
-                                   class="col-md-4 col-form-label text-md-end">Email address</label>
-
-                            <div class="col-md-6">
-                                <input id="email" type="email"
-                                       class="form-control @error('email') is-invalid @enderror" name="email"
-                                       value="{{ old('email') }}" required autocomplete="email" autofocus>
-
-                                @error('email')
-                                <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div>
-
-                        <div class="row mb-3">
-                            <label for="password"
-                                   class="col-md-4 col-form-label text-md-end">{{ __('Пароль') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="password" type="password"
-                                       class="form-control @error('password') is-invalid @enderror" name="password"
-                                       required
-                                       autocomplete="current-password">
-
-                                @error('password')
-                                <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div>
-
-                        <div class="row">
-                            <div class="col-md-6 offset-md-4 px-0">
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" name="remember"
-                                           id="remember" {{ old('remember') ? 'checked' : '' }}>
-
-                                    <label class="form-check-label" for="remember">
-                                        {{ __('Запомнить меня') }}
-                                    </label>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row text-center">
-                            <div class="col-md-12">
-                                <button type="submit" class="btn btn-secondary px-5 shadow">
-                                    {{ __('Войти') }}
-                                </button>
-                            </div>
-                        </div>
-                        <hr>
-                        <div class="row text-center">
-                            <div class="col-md-12">
-                                <button type="submit" class="btn btn-secondary px-5 shadow">
-                                    {{ __('Войти через VK') }}
-                                </button>
-                            </div>
-                        </div>
-                        <hr>
-                        <div class="row text-center mt-3">
-                            <div class="col-md-12 mt-2">
-                                @if (Route::has('password.request'))
-                                    <a class="btn btn-link" href="{{ route('password.request') }}">
-                                        {{ __('Забыли пароль?') }}
-                                    </a>
-                                @endif
-                            </div>
-                        </div>
-                        <div class="row text-center ">
-                            <div class="col-md-12 m-0">
-                                @if (Route::has('register'))
-                                    <a class="btn btn-link m-0 pt-0" href="{{ route('register') }}">
-                                        {{ __('Регистрация') }}
-                                    </a>
-                                @endif
-                            </div>
-                        </div>
-
-                    </form>
+    <div class="container container-login pt-4" style="display: block; min-width: 300px; width: 500px">
+        <h2 class="text-center">@yield('title')</h2>
+        <hr>
+        <div class="login-form">
+            <form method="POST" action="{{ route('login') }}">
+                @csrf
+                <div class="form-group">
+                    <label for="email"><b>Email</b></label>
+                    <input id="email" name="email" type="email" class="form-control" value="{{ old('email') }}"
+                           required="">
+                    @error('email')
+                    <span class="small text-danger" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
                 </div>
-            </div>
+                <div class="form-group">
+                    <label for="password"><b>{{ __('Пароль') }}</b></label>
+                    @if (Route::has('password.request'))
+                        <a href="{{ route('password.request') }}" class="link float-end">{{ __('Забыли пароль?') }}</a>
+                    @endif
+                    <div class="position-relative">
+                        <input id="password" name="password" type="password" class="form-control">
+                        @error('password')
+                        <span class="small text-danger" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                        @enderror
+                        <div class="show-password">
+                            <i class="icon-eye"></i>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="form-group form-action-d-flex mb-3">
+                    <div class="form-check">
+                        <input type="checkbox" class="form-check-input" id="remember"
+                               name="remember" {{ old('remember') ? 'checked' : '' }}>
+                        <label class="custom-control-label m-0" for="remember">{{ __('Запомнить меня') }}</label>
+                    </div>
+                    <button type="submit" class="btn btn-primary col-md-5 float-end mt-3 mt-sm-0 fw-bold">{{ __('Войти') }}</button>
+                </div>
+                <div class="login-account">
+                    <span class="msg">{{ __('У Вас нету аккаунта?') }}</span>
+                    @if (Route::has('register'))
+                        <a href="{{ route('register') }}" class="link">{{ __('Регистрация') }}</a>
+                    @endif
+                </div>
+            </form>
         </div>
     </div>
+
 @endsection
