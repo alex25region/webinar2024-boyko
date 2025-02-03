@@ -16,8 +16,8 @@
                            required="">
                     @error('email')
                     <span class="small text-danger" role="alert">
-                            <strong>{{ $message }}</strong>
-                        </span>
+                        <strong>{{ $message }}</strong>
+                    </span>
                     @enderror
                 </div>
                 <div class="form-group">
@@ -27,16 +27,15 @@
                     @endif
                     <div class="position-relative">
                         <input id="password" name="password" type="password" class="form-control">
-                        @error('password')
-                        <span class="small text-danger" role="alert">
-                            <strong>{{ $message }}</strong>
-                        </span>
-                        @enderror
                         <div class="show-password">
                             <i class="icon-eye"></i>
                         </div>
-
                     </div>
+                    @error('password')
+                    <span class="small text-danger" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
                 </div>
                 <div class="form-group form-action-d-flex mb-3">
                     <div class="form-check">
@@ -44,12 +43,14 @@
                                name="remember" {{ old('remember') ? 'checked' : '' }}>
                         <label class="custom-control-label m-0" for="remember">{{ __('Запомнить меня') }}</label>
                     </div>
-                    <button type="submit" class="btn btn-primary col-md-5 float-end mt-3 mt-sm-0 fw-bold">{{ __('Войти') }}</button>
+                    <button type="submit"
+                            class="btn btn-primary col-md-5 float-end mt-3 mt-sm-0 fw-bold">{{ __('Войти') }}</button>
                 </div>
                 <div class="login-account">
                     <span class="msg">{{ __('У Вас нету аккаунта?') }}</span>
                     @if (Route::has('register'))
-                        <a href="{{ route('register') }}" class="link">{{ __('Регистрация') }}</a>
+                        <a href="{{ route('register') }}"
+                           class="btn btn-link text-nowrap link px-1">{{ __('Регистрация') }}</a>
                     @endif
                 </div>
             </form>

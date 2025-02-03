@@ -29,7 +29,7 @@ class DatabaseSeeder extends Seeder
                 'email' => 'alex25region@rambler.ru',
                 'phone' => '123456789',
                 'password' => Hash::make('12QWaszx'),
-                'is_admin'=> 1
+                'is_admin'=> true
             ],
             [
                 'firstname' => 'alex',
@@ -37,7 +37,7 @@ class DatabaseSeeder extends Seeder
                 'email' => 'alex25region@mail.ru',
                 'phone' => '123456789',
                 'password' => Hash::make('12QWaszx'),
-                'is_admin'=> 1
+                'is_admin'=> true
             ],
         ];
 

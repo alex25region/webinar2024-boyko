@@ -45,15 +45,9 @@
 </head>
 <body class="login bg-secondary-subtle">
 <div class="wrapper wrapper-login shadow">
-    {{--<body>
 
-    <div class="d-flex justify-content-center align-items-center" style="min-height: 100vh;">
-
-        <div class="container">--}}
     @yield('content')
-    {{--    </div>
-    </div>
-    </body>--}}
+
 </div>
 <script src="{{ asset('assets/js/core/jquery-3.7.1.min.js') }}"></script>
 <script src="{{ asset('assets/js/core/popper.min.js') }}"></script>
