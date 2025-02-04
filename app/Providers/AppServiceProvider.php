@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace App\Providers;
 
+use App\Events\CreatedGoal;
+use App\Listeners\SendEmailListener;
 use App\Models\Goal;
 use App\Models\Project;
 use App\Models\Step;
@@ -17,6 +19,7 @@ use App\Repository\Step\StepRepositoryInterface;
 use App\Repository\User\UserRepository;
 use App\Repository\User\UserRepositoryInterface;
 use Illuminate\Pagination\Paginator;
+use Illuminate\Support\Facades\Event;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -38,5 +41,9 @@ class AppServiceProvider extends ServiceProvider
     public function boot(): void
     {
         Paginator::useBootstrapFive();
+
+//        Event::listen([
+//            CreatedGoal::class => [SendEmailListener::class]
+//        ]);
     }
 }
