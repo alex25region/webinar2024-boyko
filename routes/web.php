@@ -5,9 +5,13 @@ use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\StepController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\SocialNetworkController;
 
 
-
+Route::middleware(['guest'])->group(function () {
+    Route::get('redirect/{provider}', [SocialNetworkController::class, 'redirect'])->name('redirect');
+    Route::get('callback/{provider}', [SocialNetworkController::class, 'callback'])->name('callback');
+});
 
 Route::middleware('auth')->group(function () {
 

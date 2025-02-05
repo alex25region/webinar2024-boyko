@@ -8,7 +8,7 @@ use Illuminate\Broadcasting\PrivateChannel;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
 
-final class CreatedGoal
+final class CreatedGoalEvent
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 

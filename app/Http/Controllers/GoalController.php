@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers;
 
-use App\Events\CreatedGoal;
+use App\Events\CreatedGoalEvent;
 use App\Http\Requests\Goal\SaveGoalRequest;
 use App\Models\Goal;
 use App\Models\Project;
@@ -42,7 +42,7 @@ final class GoalController extends Controller
     {
 
         if ($goal = $this->repository->create($request->validated())) {
-            event(new CreatedGoal($goal));
+            event(new CreatedGoalEvent($goal));
             session()->put('success', 'Цель успешно создана!');
 
         } else {
