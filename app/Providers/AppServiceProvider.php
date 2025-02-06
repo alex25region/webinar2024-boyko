@@ -23,6 +23,7 @@ use App\Repository\User\UserRepository;
 use App\Repository\User\UserRepositoryInterface;
 use App\Services\SocialUserInterface;
 use App\Services\SocialUserService;
+use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\ServiceProvider;
@@ -49,5 +50,6 @@ class AppServiceProvider extends ServiceProvider
     public function boot(): void
     {
         Paginator::useBootstrapFive();
+        JsonResource::withoutWrapping();
     }
 }
