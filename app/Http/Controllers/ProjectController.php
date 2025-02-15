@@ -4,11 +4,14 @@ declare(strict_types=1);
 namespace App\Http\Controllers;
 
 use App\Http\Requests\Project\SaveProjectRequest;
+use App\Mail\ProjectCreatedMail;
 use App\Models\Project;
 use App\Models\User;
 use App\Repository\Project\ProjectRepositoryInterface;
 use Illuminate\Contracts\View\View;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Facades\Mail;
 
 final class ProjectController extends Controller
 {
@@ -33,7 +36,8 @@ final class ProjectController extends Controller
 
     public function store(SaveProjectRequest $request): RedirectResponse
     {
-        if ($this->repository->create($request->validated())) {
+        if ($project = $this->repository->create($request->validated())) {
+            Mail::to($project->user)->send(new ProjectCreatedMail($project));
             session()->put('success', 'Проект успешно создан!');
         } else {
             session()->put('error', 'Ошибка! Не удалось создать пользователя.');
@@ -46,7 +50,7 @@ final class ProjectController extends Controller
         return view('projects.show', compact('project'));
     }
 
-    public function edit(Project $project)
+    public function edit(Project $project): View
     {
         $users = User::query()->get();
         return view('projects.edit', compact('project', 'users'));
