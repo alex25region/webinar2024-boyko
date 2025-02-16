@@ -58,7 +58,7 @@ class SocialUserService implements SocialUserInterface
 
         event(new SocialUserEvent($user, $dto));
 
-        $this->auth->guard()->login($user);
+        Auth::login($user);
         return $user;
     }
 }

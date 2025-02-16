@@ -6,6 +6,7 @@ use App\Http\Controllers\StepController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SocialNetworkController;
+use App\Http\Controllers\CacheController;
 
 
 Route::middleware(['guest'])->group(function () {
@@ -33,6 +34,8 @@ Route::middleware('auth')->group(function () {
         });
     });
 });
+
+Route::get('cache', CacheController::class)->name('cache');
 
 
 

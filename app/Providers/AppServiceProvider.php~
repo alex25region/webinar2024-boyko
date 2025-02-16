@@ -39,7 +39,7 @@ class AppServiceProvider extends ServiceProvider
         $this->app->singleton(StepRepositoryInterface::class, fn() => new StepRepository($this->app->make(Step::class)));
 
         $this->app->bind(SocialUserInterface::class, fn() => new SocialUserService($this->app->make(AuthFactory::class)));
-        $this->app->bind(CacheInterface::class, fn() => new CacheService($this->app->make('cache'), config('cache.default')));
+        $this->app->bind(CacheInterface::class, fn() => new CacheService($this->app->make('cache', config('cache.default'))));
 
     }
 

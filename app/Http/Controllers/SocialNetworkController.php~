@@ -1,0 +1,31 @@
+<?php
+
+declare(strict_types=1);
+
+namespace App\Http\Controllers;
+
+use App\Services\SocialUserInterface;
+use Illuminate\Contracts\Auth\Factory;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Facades\Log;
+use Laravel\Socialite\Facades\Socialite;
+
+final class SocialNetworkController extends Controller
+{
+    public function redirect(string $provider): RedirectResponse
+    {
+        return Socialite::driver($provider)->redirect();
+    }
+
+    public function callback(SocialUserInterface $socialService, string $provider): RedirectResponse
+    {
+        try {
+            $user = Socialite::driver($provider)->user();
+            $socialService->createOrUpdateUserViaSocialNetwork($user, $provider);
+        } catch (\Exception $exception) {
+            Log::error($exception->getMessage());
+        }
+        return redirect()->route('dashboard');
+
+    }
+}
