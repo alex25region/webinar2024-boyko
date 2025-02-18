@@ -7,15 +7,20 @@ use App\Http\Requests\Project\SaveProjectRequest;
 use App\Mail\ProjectCreatedMail;
 use App\Models\Project;
 use App\Models\User;
+use App\Notifications\TestNotification;
 use App\Repository\Project\ProjectRepositoryInterface;
+use App\Services\FileUpload\FileUplodService;
 use Illuminate\Contracts\View\View;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Storage;
 
 final class ProjectController extends Controller
 {
-    public function __construct(private readonly ProjectRepositoryInterface $repository)
+    public function __construct(
+        private readonly ProjectRepositoryInterface $repository,
+        private readonly FileUplodService           $fileUplodService
+    )
     {
 
     }
@@ -37,10 +42,20 @@ final class ProjectController extends Controller
     public function store(SaveProjectRequest $request): RedirectResponse
     {
         if ($project = $this->repository->create($request->validated())) {
+
+            if($request->hasFile('image')) {
+                $file = $request->file('image');
+                if($file->isValid()) {
+                    $this->repository->saveImage($project, $this->fileUplodService->upload($file, $project));
+                }
+            }
+
             Mail::to($project->user)->send(new ProjectCreatedMail($project));
             session()->put('success', 'Проект успешно создан!');
+
+
         } else {
-            session()->put('error', 'Ошибка! Не удалось создать пользователя.');
+            session()->put('error', 'Ошибка! Не удалось создать проект.');
         }
         return to_route('projects.index');
     }
@@ -61,8 +76,26 @@ final class ProjectController extends Controller
      */
     public function update(SaveProjectRequest $request, Project $project): RedirectResponse
     {
-        if ($this->repository->update($project, $request->validated())) {
-            session()->put('success', 'Проект успешно отредактирован!');
+        $data = $request->validated();
+        unset($data['image']);
+
+        if ($this->repository->update($project, $data)) {
+            if ($request->hasFile('image')) {
+                $file = $request->file('image');
+                if ($file->isValid()) {
+                    $link = $this->fileUplodService->upload(
+                        $file,
+                        $project
+                    );
+                    $this->repository->saveImage(
+                        $project,
+                        $link
+                    );
+                }
+            }
+            $delay = now()->addMinute();
+            $project->user->notify((new TestNotification($project))->delay($delay));
+            session()->put('success', 'Проект успешно отредактёирован!');
         } else {
             session()->put('error', 'Ошибка! Не удалось отредактировать проект.');
         }

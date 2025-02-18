@@ -37,6 +37,7 @@
                             )
                         </td>
                         <td>{{ $project->name }}</td>
+{{--                        <td>{{ $project->image }}</td>--}}
                         <td><img class="w-25 p-0 m-0" src="{{ Storage::disk('public')->url($project->image) }}" alt=""></td>
                         <td>{{ $project->description }}</td>
                         <td class="text-nowrap">
